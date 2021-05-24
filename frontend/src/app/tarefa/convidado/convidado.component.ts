@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Convidado } from '../Convidado';
-import { FieldMessage } from '../FieldMessage';
+import { Convidado } from '../convidado/Convidado';
+import { FieldMessage } from '../../model-error/FieldMessage';
 import { ConvidadoService } from '../../service/convidado.service';
 import { TarefaComponent } from '../tarefa/tarefa.component';
 import { TarefaService } from '../../service/tarefa.service';

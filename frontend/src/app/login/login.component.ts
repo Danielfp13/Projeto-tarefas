@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { Usuario } from './Usuario';
-import { FieldMessage } from '../tarefa/FieldMessage';
+import { FieldMessage } from '../model-error/FieldMessage';
 
 @Component({
   selector: 'app-login',
@@ -50,6 +50,7 @@ export class LoginComponent {
         localStorage.setItem('access_token',access_token);
         this.router.navigate(['/tarefa']);
       },responseError =>{
+        this.errors=[]
         this.erro.fieldName ="email ou senha"
         this.erro.message = 'Usuário e ou senha incorreto.'
         this.errors.push(this.erro)

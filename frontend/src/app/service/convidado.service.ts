@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Convidado } from '../tarefa/Convidado';
+import { Convidado } from '../tarefa/convidado/Convidado';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';

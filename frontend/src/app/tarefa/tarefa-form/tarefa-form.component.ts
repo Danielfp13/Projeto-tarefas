@@ -5,7 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../service/auth.service';
 import { Usuario } from '../../login/Usuario';
-import { FieldMessage } from '../FieldMessage';
+import { FieldMessage } from '../../model-error/FieldMessage';
 
 
 @Component({

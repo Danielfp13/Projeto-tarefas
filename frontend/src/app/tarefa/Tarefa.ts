@@ -1,4 +1,4 @@
-import { Convidado } from './Convidado'
+import { Convidado } from './convidado/Convidado'
 
 export class Tarefa {
    id: number
