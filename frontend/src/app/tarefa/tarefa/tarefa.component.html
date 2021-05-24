@@ -1,0 +1,95 @@
+<h1 class="mt-4">Tarefas cadastradas</h1>
+<ol class="breadcrumb mb-4">
+   <li class="breadcrumb-item active">Tarefas</li>
+</ol>
+<div class="container">
+
+   <div class="row">
+      <div class="col-md-12">
+         <div class="alert alert-{{cor}}" role="alert" *ngIf="menssageDeResposta">
+            {{menssageDeResposta}}
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-2">
+         <button class="btn btn-warning" (click)="novoCadastro()">
+            <i class="fas fa-user-plus"></i>
+            Novo
+         </button>
+      </div>
+   </div>
+
+   <br>
+
+   <div class="row">
+      <div class="col-md-12">
+         <table class="table table-condensed table-hover">
+            <thead>
+               <th>Id</th>
+               <th>Nome</th>
+               <th>Data</th>
+               <th>Duração</th>
+               <th>Local</th>
+               <th>Convidados</th>
+
+               <th>Convidar</th>
+            </thead>
+            <tbody>
+               <tr *ngFor="let x of tarefas">
+                  <td>{{ x.id }}</td>
+                  <td>{{ x.nome }}</td>
+                  <td>{{ x.dataHora }}</td>
+                  <td>{{ x.duracao }}</td>
+                  <td>{{ x.local }}</td>
+                  <td>
+
+                     <select class="form-select form-control" aria-label=".form-select example">
+                        <option selected *ngFor="let convidado of x.convidados ">{{ convidado.nome }}</option>
+                     </select>
+                  </td>
+
+                  <td>
+                     <button class="btn-primary" (click)="inserirConvidado(x.id)">
+                        <i class="fas fa-user-plus "></i>
+                     </button>
+                  <td>
+
+                  <td>
+                     <button class="btn-primary" routerLink="/tarefa/form/{{ x.id }}">
+                        <i class="fas fa-user-edit"></i>
+                     </button>
+                     <button class="btn-danger ml-3" data-bs-toggle="modal" data-bs-target="#modaldelecao"
+                        (click)="preparaDelecao(x)">
+                        <i class="fas fa-user-times"></i>
+                     </button>
+
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+   <div class="modal fade" id="modaldelecao" role="dialog">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h4>Confirmação</h4>
+               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body" *ngIf="tarefaSelecionada">
+               <p>Deseja excluir a terefa {{tarefaSelecionada.nome}}.</p>
+
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-success" (click)="deletar()"
+                  data-bs-dismiss="modal">Confirmar</button>
+               <button class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
