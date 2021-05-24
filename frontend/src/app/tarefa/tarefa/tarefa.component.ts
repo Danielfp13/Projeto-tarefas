@@ -16,16 +16,13 @@ export class TarefaComponent implements OnInit {
   cor: string = 'denger';
   idtarefa: number;
 
-  emitirIdTarefa = new EventEmitter<number>();
-
-
   constructor(private service: TarefaService,
     private router: Router) {
 
   }
 
   ngOnInit(): void {
-    this.service.listaTarefa().subscribe(resposta => {
+    this.service.listaMinhaTarefa().subscribe(resposta => {
       this.tarefas = resposta;
     })
   }

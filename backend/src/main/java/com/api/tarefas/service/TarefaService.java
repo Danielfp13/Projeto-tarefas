@@ -30,7 +30,14 @@ public class TarefaService {
 	}
 
 	public List<Tarefa> findAll() {
+		String user = UserService.authenticated();
 		return tarefaRepository.findAll();
+	}
+	
+	public List<Tarefa> myTask() {
+		String user = UserService.authenticated();
+		Usuario usuario = usuarioRepository.findByEmail(user).orElseThrow(() -> new ObjectNotFoundException("Não foi encontrado usuario autenticado"));
+		return tarefaRepository.findMyTask(usuario.getId());
 	}
 
 	public Tarefa find(Integer id) {

@@ -73,5 +73,11 @@ public class TarefaResource {
 		service.update(tarefa, id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping(value="/usuario")
+	public ResponseEntity<List<Tarefa>> myTask() {
+		List<Tarefa> tarefa = service.myTask();
+		return ResponseEntity.ok().body(tarefa);
+	}
 
 }

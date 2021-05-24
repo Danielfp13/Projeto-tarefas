@@ -23,6 +23,10 @@ export class TarefaService {
     return this.http.get<Tarefa[]>(`${this.apiURL}/tarefas`);
   }
 
+  listaMinhaTarefa(): Observable<Tarefa[]> {
+    return this.http.get<Tarefa[]>(`${this.apiURL}/tarefas/usuario`);
+  }
+
   alterarTarefa(tarefa: Tarefa, id: any):Observable<any>{
     return this.http.put<Tarefa>(`${this.apiURL}/tarefas/${id}`,tarefa);
   }
