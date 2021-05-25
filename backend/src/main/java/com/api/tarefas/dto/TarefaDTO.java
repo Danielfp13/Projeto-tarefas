@@ -20,7 +20,7 @@ public class TarefaDTO {
 	private String nome;
 	
 	@NotNull(message = "O campo data hora é obrigatório.")
-	@JsonFormat(pattern = "dd-MM-yyyy HH:mm")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private Date dataHora;
 	
 	@NotEmpty(message = "O campo duracao é obrigatório.")

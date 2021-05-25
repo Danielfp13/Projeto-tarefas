@@ -21,7 +21,7 @@ public class TarefaService {
 
 	@Autowired
 	private TarefaRepository tarefaRepository;
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
@@ -30,20 +30,22 @@ public class TarefaService {
 	}
 
 	public List<Tarefa> findAll() {
-		String user = UserService.authenticated();
 		return tarefaRepository.findAll();
 	}
-	
-	public List<Tarefa> myTask() {
+
+	public Page<Tarefa> myTask(Integer page, Integer linesPerPage, String direction, String orderBy) {
 		String user = UserService.authenticated();
-		Usuario usuario = usuarioRepository.findByEmail(user).orElseThrow(() -> new ObjectNotFoundException("Não foi encontrado usuario autenticado"));
-		return tarefaRepository.findMyTask(usuario.getId());
+		Usuario usuario = usuarioRepository.findByEmail(user)
+				.orElseThrow(() -> new ObjectNotFoundException("Não foi encontrado usuario autenticado"));
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return tarefaRepository.findMyTask(usuario.getId(), pageRequest);
 	}
 
 	public Tarefa find(Integer id) {
-		return tarefaRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Não foi encontrado tarefas com id: " + id + "."));
+		return tarefaRepository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("Não foi encontrado tarefas com id: " + id + "."));
 	}
-	
+
 	public Page<Tarefa> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
 		PageRequest pageRequest = PageRequest.of(page, linePerPage, Direction.valueOf(direction), orderBy);
 		return tarefaRepository.findAll(pageRequest);
@@ -68,10 +70,11 @@ public class TarefaService {
 		tarefa.setUsuario(usuario);
 		tarefaRepository.save(tarefa);
 	}
-	
+
 	public Tarefa fromDto(TarefaDTO tarefaDto) {
 		Usuario usuario = usuarioRepository.findById(tarefaDto.getIdUsuario()).get();
-		Tarefa tarefa = new Tarefa(null ,tarefaDto.getNome(),tarefaDto.getDataHora(), tarefaDto.getDuracao(), tarefaDto.getLocal(), usuario);
+		Tarefa tarefa = new Tarefa(null, tarefaDto.getNome(), tarefaDto.getDataHora(), tarefaDto.getDuracao(),
+				tarefaDto.getLocal(), usuario);
 		return tarefa;
 	}
 }

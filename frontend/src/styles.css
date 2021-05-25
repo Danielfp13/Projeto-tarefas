@@ -8,3 +8,5 @@ body {
    text-align: left;
    background-color: rgb(132, 166, 241);
  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

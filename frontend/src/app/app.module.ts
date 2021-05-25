@@ -13,16 +13,15 @@ import { LayoutComponent } from './layout/layout.component';
 import { TemplateModule } from './template/template.module';
 import { TarefaModule } from './tarefa/tarefa.module';
 import { TarefaService } from './service/tarefa.service';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { PtBrMatPaginatorIntl } from './tarefa/tarefa/tradução-table';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LayoutComponent,
-  
-
   ],
   imports: [
     BrowserModule,
@@ -30,7 +29,9 @@ import { TarefaService } from './service/tarefa.service';
     HttpClientModule,
     FormsModule,
     TemplateModule,
-    TarefaModule
+    TarefaModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule,
   ],
   providers: [
      AuthService,
@@ -39,6 +40,10 @@ import { TarefaService } from './service/tarefa.service';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+    provide: MatPaginatorIntl,
+    useClass: PtBrMatPaginatorIntl
     }
   ],
   bootstrap: [AppComponent]

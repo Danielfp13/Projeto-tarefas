@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Convidado } from '../convidado/Convidado';
 import { FieldMessage } from '../../model-error/FieldMessage';
@@ -21,12 +21,10 @@ export class ConvidadoComponent implements OnInit {
   constructor(private service: ConvidadoService, private router: Router, private tatefaService: TarefaService) {
     this.convidado = new Convidado();
   }
-tarefa: TarefaComponent
 
   ngOnInit(): void {
-  this.idTarefa=this.tatefaService.enviar()
+    this.idTarefa = this.tatefaService.enviar()
   }
-
 
   onSubmit() {
     this.convidado.idTarefa = this.idTarefa
@@ -35,12 +33,14 @@ tarefa: TarefaComponent
         this.success = true;
         this.errors = [];
         this.convidado = response;
+        this.convidado.nome=''
       },
       (errorResponse) => {
         this.errors = errorResponse.error.erros;
         this.success = false;
       }
     );
+    
   }
 
   voltarParaListagem() {

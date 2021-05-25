@@ -1,11 +1,11 @@
-<h1 class="mt-4">Tarefas cadastradas</h1>
+<h1 class="mt-4">Minhas tarefas</h1>
 <ol class="breadcrumb mb-4">
    <li class="breadcrumb-item active">Tarefas</li>
 </ol>
-<div class="container">
+<div class="container-fluid">
 
    <div class="row">
-      <div class="col-md-12">
+      <div class="col-sm-12">
          <div class="alert alert-{{cor}}" role="alert" *ngIf="menssageDeResposta">
             {{menssageDeResposta}}
          </div>
@@ -13,10 +13,10 @@
    </div>
 
    <div class="row">
-      <div class="col-md-2">
+      <div class="col-sm-4">
          <button class="btn btn-warning" (click)="novoCadastro()">
-            <i class="fas fa-user-plus"></i>
-            Novo
+            <i class="fas fa-plus-square"></i>
+            Nova tarefa
          </button>
       </div>
    </div>
@@ -24,51 +24,57 @@
    <br>
 
    <div class="row">
-      <div class="col-md-12">
-         <table class="table table-condensed table-hover">
-            <thead>
-               <th>Id</th>
-               <th>Nome</th>
-               <th>Data</th>
-               <th>Duração</th>
-               <th>Local</th>
-               <th>Convidados</th>
+      <div class="col-sm-12">
+         <div class="table-responsive-sm">
+            <table class="table align-middle">
+               <thead>
+                  <th scope="col">Id</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Duração</th>
+                  <th scope="col">Local</th>
+                  <th scope="col">Convidados</th>
+                  <th scope="col">Convidar</th>
 
-               <th>Convidar</th>
-            </thead>
-            <tbody>
-               <tr *ngFor="let x of tarefas">
-                  <td>{{ x.id }}</td>
-                  <td>{{ x.nome }}</td>
-                  <td>{{ x.dataHora }}</td>
-                  <td>{{ x.duracao }}</td>
-                  <td>{{ x.local }}</td>
-                  <td>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let x of tarefas">
+                     <td>{{ x.id }}</td>
+                     <td>{{ x.nome }}</td>
+                     <td>{{ x.dataHora }}</td>
+                     <td>{{ x.duracao }}</td>
+                     <td>{{ x.local }}</td>
+                     <td>
 
-                     <select class="form-select form-control" aria-label=".form-select example">
-                        <option selected *ngFor="let convidado of x.convidados ">{{ convidado.nome }}</option>
-                     </select>
-                  </td>
+                        <select class="form-select form-control" aria-label=".form-select example">
+                           <option selected *ngFor="let convidado of x.convidados ">{{ convidado.nome }}</option>
+                        </select>
+                     </td>
 
-                  <td>
-                     <button class="btn-primary" (click)="inserirConvidado(x.id)">
-                        <i class="fas fa-user-plus "></i>
-                     </button>
-                  <td>
+                     <td>
+                        <button class="btn-primary" (click)="inserirConvidado(x.id)">
+                           <i class="fas fa-user-plus "></i>
+                        </button>
+                     <td>
 
-                  <td>
-                     <button class="btn-primary" routerLink="/tarefa/form/{{ x.id }}">
-                        <i class="fas fa-user-edit"></i>
-                     </button>
-                     <button class="btn-danger ml-3" data-bs-toggle="modal" data-bs-target="#modaldelecao"
-                        (click)="preparaDelecao(x)">
-                        <i class="fas fa-user-times"></i>
-                     </button>
+                     <td>
+                        <button class="btn-primary" routerLink="/tarefa/form/{{ x.id }}">
+                           <i class="fas fa-user-edit"></i>
+                        </button>
+                        <button class="btn-danger ml-3" data-bs-toggle="modal" data-bs-target="#modaldelecao"
+                           (click)="preparaDelecao(x)">
+                           <i class="fas fa-user-times"></i>
+                        </button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
 
-                  </td>
-               </tr>
-            </tbody>
-         </table>
+         <mat-paginator [length]="totalElementos" [pageSize]="linePerPage" [pageSizeOptions]="pageSizeOptions"
+            (page)="paginar($event)">
+         </mat-paginator>
+
       </div>
    </div>
    <div class="modal fade" id="modaldelecao" role="dialog">

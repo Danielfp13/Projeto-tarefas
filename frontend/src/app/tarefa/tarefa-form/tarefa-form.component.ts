@@ -37,7 +37,6 @@ export class TarefaFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.usernameUsuario = this.authService.getUsuarioAutenticado()
-
     this.authService.buscarUsuario(this.usernameUsuario).subscribe(
       (response =>{
         this.usuarioAutenticado = response;
@@ -50,6 +49,11 @@ export class TarefaFormComponent implements OnInit {
       if (this.tarefaId) {
         this.service.getTarefaById(this.tarefaId).subscribe(
           (response) => {
+            let tempo = response.dataHora.slice(11)
+            let dia = response.dataHora.split('/')
+            let ano = response.dataHora.slice(6,-6)
+            let data = `${ano}-${dia[1]}-${dia[0]}T${tempo}`
+            response.dataHora = data
             this.tarefa = response;
           },
           (errorResponse) => {
@@ -62,7 +66,6 @@ export class TarefaFormComponent implements OnInit {
 
   onSubmit() {
     if (this.tarefaId) {
-      this.tarefa.dataHora=this.tarefa.dataHora.replace("T",' ');
       this.tarefa.idUsuario = this.usuarioAutenticado.id
       console.log(this.tarefa)
       this.service.alterarTarefa(this.tarefa, this.tarefaId).subscribe(
@@ -75,7 +78,6 @@ export class TarefaFormComponent implements OnInit {
         })
 
     } else {
-      this.tarefa.dataHora=this.tarefa.dataHora.replace("T",' ');
       this.tarefa.idUsuario = this.usuarioAutenticado.id
       console.log(this.tarefa)
       this.service.salvar(this.tarefa).subscribe(

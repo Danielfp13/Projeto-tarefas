@@ -32,7 +32,7 @@ public class Tarefa implements Serializable{
 	
 	private String nome;
 	
-	@JsonFormat(pattern = "dd-MM-yyyy HH:mm")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataHora;
 	
 	private String duracao; 

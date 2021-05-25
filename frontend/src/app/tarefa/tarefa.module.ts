@@ -5,6 +5,7 @@ import { TarefaFormComponent } from './tarefa-form/tarefa-form.component';
 import { TarefaRoutingModule } from './tarefa-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ConvidadoComponent } from './convidado/convidado.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -18,7 +19,8 @@ import { ConvidadoComponent } from './convidado/convidado.component';
   imports: [
     CommonModule,
     TarefaRoutingModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule
   ],exports: [
     TarefaComponent,
     TarefaFormComponent,

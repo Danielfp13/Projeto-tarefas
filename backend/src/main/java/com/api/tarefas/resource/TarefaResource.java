@@ -53,7 +53,8 @@ public class TarefaResource {
 
 
 	@GetMapping(value = "/page")
-	public ResponseEntity<Page<Tarefa>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+	public ResponseEntity<Page<Tarefa>> findPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linePerPage", defaultValue = "24") Integer linePerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy) {
@@ -75,8 +76,14 @@ public class TarefaResource {
 	}
 	
 	@GetMapping(value="/usuario")
-	public ResponseEntity<List<Tarefa>> myTask() {
-		List<Tarefa> tarefa = service.myTask();
+	public ResponseEntity<Page<Tarefa>> myTask(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linePerPage", defaultValue = "24") Integer linePerPage,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy
+		) {
+		
+		Page<Tarefa> tarefa = service.myTask(page, linePerPage, direction, orderBy);
 		return ResponseEntity.ok().body(tarefa);
 	}
 
