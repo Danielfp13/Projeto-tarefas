@@ -1,7 +1,6 @@
 package com.api.tarefas.resource;
 
 import java.net.URI;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -37,13 +36,6 @@ public class TarefaResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(tarefa.getId()).toUri();
 		return ResponseEntity.created(uri).body(tarefa);
 	}
-
-	@GetMapping
-	public ResponseEntity<List<Tarefa>> findAll() {
-		List<Tarefa> tarefa = service.findAll();
-		return ResponseEntity.ok().body(tarefa);
-	}
-
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Tarefa> find(@PathVariable Integer id) {

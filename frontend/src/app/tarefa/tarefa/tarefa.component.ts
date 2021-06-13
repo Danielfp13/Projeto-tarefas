@@ -87,7 +87,7 @@ export class TarefaComponent implements OnInit {
   inserirConvidado(idTarefa: number): void {
     this.router.navigate([
       '/tarefa/convidado/'])
-    this.service.receber(idTarefa);
+    this.service.idTarefa=idTarefa;
   }
 
 }

@@ -38,7 +38,7 @@ export class TarefaService {
       .set('linePerPage' , linePerPage.toString())
       .set( 'direction', direction)
       .set( 'orderBy', orderBy)
-    
+
     return this.http.get<any>(`${this.apiURL}/tarefas/usuario?${params.toString()}`);
   }
 
@@ -48,13 +48,5 @@ export class TarefaService {
 
   deleteById(id: any) : Observable<any>{
     return this.http.delete<any>(`${this.apiURL}/tarefas/${id}`);
-  }
-
-  receber(id: number): void{
-    this.idTarefa = id;
-  }
-
-  enviar():number{
-    return this.idTarefa
   }
 }

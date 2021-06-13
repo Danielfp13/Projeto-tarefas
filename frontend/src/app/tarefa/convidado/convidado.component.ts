@@ -23,7 +23,7 @@ export class ConvidadoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.idTarefa = this.tatefaService.enviar()
+    this.idTarefa = this.tatefaService.idTarefa
   }
 
   onSubmit() {
@@ -40,7 +40,7 @@ export class ConvidadoComponent implements OnInit {
         this.success = false;
       }
     );
-    
+
   }
 
   voltarParaListagem() {

@@ -16,13 +16,6 @@ import com.api.tarefas.service.UserDetailsServiceImp;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//	
-//	private static final String[] PUBLIC_MATCHERS = {
-//			"/jdbc:postgresql://localhost:5432/teste-tarefa/**"
-//	};
-		
-
-	
 	
 	@Autowired
 	private UserDetailsServiceImp userDeatailsService;
@@ -31,13 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDeatailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
-
 	@Bean
 	public static BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 	
+	//classe responsavel por fazer o gerenciamento da aplicação ou seja é atraves dele que se sabe quem são os usuarios e sua senhas
 	@Bean
 	public AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();

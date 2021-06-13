@@ -1,7 +1,5 @@
 package com.api.tarefas.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -27,10 +25,6 @@ public class TarefaService {
 
 	public Tarefa insert(Tarefa tarefa) {
 		return tarefaRepository.save(tarefa);
-	}
-
-	public List<Tarefa> findAll() {
-		return tarefaRepository.findAll();
 	}
 
 	public Page<Tarefa> myTask(Integer page, Integer linesPerPage, String direction, String orderBy) {

@@ -28,10 +28,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${security.jwt.signing-key}")
     private String signingkey;
 
-    @Bean
+    @Bean //reponsavel por gerar o token
     public TokenStore tokenStore(){
         return new JwtTokenStore(accessTokenConverter());
     }
+    
     @Bean
     public JwtAccessTokenConverter accessTokenConverter(){
         JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
@@ -39,6 +40,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return tokenConverter;
     }
 
+    //gerencia os endpoints
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
@@ -47,6 +49,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authenticationManager(authenticationManager);
     }
 
+    //aplicações clientes
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory().withClient("my-angular-app")
